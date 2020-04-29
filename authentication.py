@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 """This module provides functions for authenticating users."""
 
