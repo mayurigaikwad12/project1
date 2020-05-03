@@ -4,7 +4,8 @@
 
 from unittest import TestCase
 from mock import patch
-import project1.authentication as auth
+#import project1.authentication as auth
+from project1 import authentication
 
 class StandAloneTests(TestCase):
     """Test the stand-alone module functions."""
@@ -14,17 +15,17 @@ class StandAloneTests(TestCase):
         """Test the login function when things go right."""
         mock_open.return_value.read.return_value = \
             "george|bosco"
-        self.assertTrue(auth.login('george', 'bosco'))
+        self.assertTrue(authentication.login('george', 'bosco'))
 
     @patch('__builtin__.open')
     def test_login_bad_creds(self, mock_open):
         """Test the login function when bad creds are passed."""
         mock_open.return_value.read.return_value = \
             "george|bosco"
-        self.assertFalse(auth.login('george', 'marbleRye'))
+        self.assertFalse(authentication.login('george', 'marbleRye'))
 
     @patch('__builtin__.open')
     def test_login_error(self, mock_open):
         """Test the login function when an error happens."""
         mock_open.side_effect = IOError()
-        self.assertFalse(auth.login('george', 'bosco'))
+        self.assertFalse(authentication.login('george', 'bosco'))
